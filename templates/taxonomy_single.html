@@ -1,0 +1,27 @@
+{# taxonomy_single.html — lists posts for a single tag #}
+{% extends "base.html" %}
+
+{% block title %}#{{ term.name }} | {{ config.title }}{% endblock %}
+
+{% block content %}
+<header class="section-header">
+  <h1>#{{ term.name }}</h1>
+  <p>{{ term.pages | length }} post{% if term.pages | length != 1 %}s{% endif %}</p>
+</header>
+
+<ul class="post-list">
+  {% for page in term.pages %}
+  <li class="post-item">
+    <a href="{{ page.permalink | safe }}">{{ page.title }}</a>
+    {% if page.date %}
+    <span class="date">{{ page.date | date(format="%B %e, %Y") }}</span>
+    {% endif %}
+    {% if page.description %}
+    <p class="summary">{{ page.description }}</p>
+    {% elif page.summary %}
+    <p class="summary">{{ page.summary }}</p>
+    {% endif %}
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}

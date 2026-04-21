@@ -1,0 +1,36 @@
+{# templates/page.html — individual note or project page #}
+{% extends "base.html" %}
+
+{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
+
+{% block description %}
+  {% if page.description %}{{ page.description }}{% else %}{{ config.description }}{% endif %}
+{% endblock %}
+
+{% block content %}
+<article class="post">
+  <header class="post-header">
+    <h1>{{ page.title }}</h1>
+    {% if page.date %}
+    <time datetime="{{ page.date | date(format='%Y-%m-%d') }}">
+      {{ page.date | date(format="%B %e, %Y") }}
+    </time>
+    {% endif %}
+    {% if page.taxonomies.tags %}
+    <ul class="tags" aria-label="Tags">
+      {% for tag in page.taxonomies.tags %}
+      <li><a href="{{ get_taxonomy_url(kind='tags', name=tag) | safe }}">#{{ tag }}</a></li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </header>
+
+  <div class="post-content">
+    {{ page.content | safe }}
+  </div>
+
+  <footer class="post-footer">
+    <a href="{{ get_url(path='/') | safe }}">&larr; All posts</a>
+  </footer>
+</article>
+{% endblock %}

@@ -1,0 +1,368 @@
+/* ── Reset & base ─────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:            #faf4e6;   /* cream */
+  --surface:       #fdf8ec;   /* warm paper */
+  --border:        #e6d9c0;   /* soft beige */
+  --text:          #2e2a24;   /* warm ink */
+  --muted:         #7a7165;   /* warm taupe */
+  --accent:        #6b8c62;   /* sage green */
+  --accent-hover:  #4f6b48;
+  --accent-2:      #7a9fba;   /* pastel blue */
+  --accent-2-hover:#5d83a0;
+  --accent-3:      #c28a85;   /* dusty rose */
+  --accent-3-hover:#a06d68;
+  --chip-bg:       #e4ecdb;   /* pale sage */
+  --chip-bg-alt:   #dde8f0;   /* pale blue */
+  --chip-bg-rose:  #f3dedb;   /* pale rose */
+
+  --measure:       640px;     /* classic blog reading column */
+  --radius:        4px;
+  --font-sans:     system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-serif:    Georgia, "Times New Roman", serif;
+}
+
+html { font-size: 17px; scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-serif);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.65;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a { color: var(--accent); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:hover { color: var(--accent-hover); }
+
+/* ── Masthead ─────────────────────────────────────────────── */
+.masthead {
+  max-width: var(--measure);
+  width: 100%;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 1.5rem;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.masthead-title {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+}
+
+.masthead-title:hover { color: var(--accent-hover); }
+
+.masthead-tagline {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--muted);
+  margin-top: 0.4rem;
+  font-size: 1rem;
+}
+
+.masthead-nav {
+  margin-top: 1.25rem;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+}
+
+.masthead-nav a {
+  color: var(--muted);
+  text-decoration: none;
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.masthead-nav a:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* ── Main column ──────────────────────────────────────────── */
+main {
+  flex: 1;
+  max-width: var(--measure);
+  width: 100%;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+}
+
+main > section + section { margin-top: 3rem; }
+
+/* ── Footer ───────────────────────────────────────────────── */
+footer {
+  border-top: 1px solid var(--border);
+  text-align: center;
+  padding: 1.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+/* ── Intro (homepage) ─────────────────────────────────────── */
+.intro p {
+  font-size: 1.1rem;
+  color: var(--text);
+  line-height: 1.7;
+}
+
+/* ── Section headings ─────────────────────────────────────── */
+h2 {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.section-header {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.section-header h1 {
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+  color: var(--text);
+}
+
+.section-header p {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+/* ── Post list (section + homepage) ───────────────────────── */
+.post-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.post-item a {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 0.15rem;
+}
+
+.post-item a:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.post-item .date {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.post-item .summary {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ── Individual post ──────────────────────────────────────── */
+.post-header {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.post-header h1 {
+  font-family: var(--font-serif);
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+
+.post-header time {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.post-content {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  line-height: 1.75;
+}
+
+.post-content p,
+.post-content ul,
+.post-content ol { margin-bottom: 1.2rem; }
+
+.post-content h2,
+.post-content h3,
+.post-content h4 {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  color: var(--text);
+  margin: 2rem 0 0.75rem;
+  padding: 0;
+  border: 0;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.post-content h2 { font-size: 1.4rem; }
+.post-content h3 { font-size: 1.2rem; }
+.post-content h4 { font-size: 1.05rem; }
+
+.post-content ul,
+.post-content ol { padding-left: 1.25rem; }
+
+.post-content a { color: var(--accent); }
+.post-content a:hover { color: var(--accent-hover); }
+
+.post-content code {
+  font-size: 0.9em;
+  background: var(--chip-bg);
+  color: var(--accent-hover);
+  padding: 0.1em 0.35em;
+  border-radius: var(--radius);
+}
+
+.post-content pre {
+  background: #2e2a24;
+  color: #f0e9d6;
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius);
+  overflow-x: auto;
+  margin-bottom: 1.2rem;
+  font-size: 0.9rem;
+}
+
+.post-content pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+}
+
+.post-content blockquote {
+  border-left: 3px solid var(--accent-3);
+  margin: 1.5rem 0;
+  padding: 0.25rem 1.25rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* ── Post tags (below title) ──────────────────────────────── */
+.tags {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.75rem;
+}
+
+.tags a {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  background: var(--chip-bg);
+  color: var(--accent-hover);
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+}
+
+.tags a:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+.post-footer {
+  margin-top: 3rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+}
+
+/* ── Tag filter chips (section pages) ─────────────────────── */
+.tag-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 1rem;
+}
+
+.tag-chip {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  background: var(--chip-bg);
+  color: var(--accent-hover);
+  border: 1px solid transparent;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.tag-chip:hover,
+.tag-chip[aria-pressed="true"] {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.tag-chip--all {
+  background: var(--chip-bg-alt);
+  color: var(--accent-2-hover);
+}
+
+.tag-chip--all:hover,
+.tag-chip--all[aria-pressed="true"] {
+  background: var(--accent-2);
+  border-color: var(--accent-2);
+  color: #fff;
+}
+
+.no-results {
+  color: var(--muted);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  margin-top: 1.5rem;
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 520px) {
+  html { font-size: 16px; }
+  .masthead { padding: 2rem 1rem 1.25rem; }
+  .masthead-title { font-size: 1.6rem; }
+  main { padding: 1.5rem 1rem; }
+  .post-header h1 { font-size: 1.75rem; }
+  .masthead-nav { gap: 1rem; }
+}

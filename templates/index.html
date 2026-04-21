@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="intro">
+  <p>
+    Hi, I'm Koa. This is where I write about the home I'm making
+    and the art I'm making — projects in progress, small fixes,
+    sketches and paintings, and the process behind them.
+  </p>
+</section>
+
+<section class="recent-posts">
+  <h2>Latest posts</h2>
+  <ul class="post-list">
+    {% set home = get_section(path="home/_index.md") %}
+    {% set art  = get_section(path="art/_index.md") %}
+    {% set combined = home.pages | concat(with=art.pages) | sort(attribute="date") | reverse %}
+    {% for page in combined | slice(end=10) %}
+    <li class="post-item">
+      <a href="{{ page.permalink | safe }}">{{ page.title }}</a>
+      {% if page.date %}
+      <span class="date">{{ page.date | date(format="%B %e, %Y") }}</span>
+      {% endif %}
+      {% if page.description %}
+      <p class="summary">{{ page.description }}</p>
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endblock %}

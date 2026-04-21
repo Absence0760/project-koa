@@ -1,0 +1,19 @@
+{# taxonomy_list.html — lists all tags #}
+{% extends "base.html" %}
+
+{% block title %}Tags | {{ config.title }}{% endblock %}
+
+{% block content %}
+<header class="section-header">
+  <h1>Tags</h1>
+</header>
+
+<ul class="post-list">
+  {% for term in terms %}
+  <li class="post-item">
+    <a href="{{ term.permalink | safe }}">#{{ term.name }}</a>
+    <span class="date">{{ term.pages | length }} post{% if term.pages | length != 1 %}s{% endif %}</span>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}

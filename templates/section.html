@@ -1,0 +1,60 @@
+{# templates/section.html — shared list template for blog + research #}
+{% extends "base.html" %}
+
+{% block title %}{{ section.title }} | {{ config.title }}{% endblock %}
+
+{% block description %}
+  {% if section.description %}{{ section.description }}{% else %}{{ config.description }}{% endif %}
+{% endblock %}
+
+{% block content %}
+<header class="section-header">
+  <h1>{{ section.title }}</h1>
+  {% if section.description %}
+  <p>{{ section.description }}</p>
+  {% endif %}
+
+  {# Collect unique tags across all pages in this section #}
+  {% set all_tags = [] %}
+  {% for page in section.pages %}
+    {% if page.taxonomies.tags %}
+      {% for tag in page.taxonomies.tags %}
+        {% set_global all_tags = all_tags | concat(with=tag) %}
+      {% endfor %}
+    {% endif %}
+  {% endfor %}
+  {% set unique_tags = all_tags | unique | sort %}
+
+  {% if unique_tags %}
+  <div class="tag-filter" role="group" aria-label="Filter by tag">
+    <button class="tag-chip tag-chip--all" aria-pressed="true">All</button>
+    {% for tag in unique_tags %}
+    <button class="tag-chip" data-tag="{{ tag }}" aria-pressed="false">#{{ tag }}</button>
+    {% endfor %}
+  </div>
+  {% endif %}
+</header>
+
+<ul id="post-list" class="post-list">
+  {% for page in section.pages %}
+  <li class="post-item" data-tags="{{ page.taxonomies.tags | default(value=[]) | join(sep=',') }}">
+    <a href="{{ page.permalink | safe }}">{{ page.title }}</a>
+    {% if page.date %}
+    <span class="date">{{ page.date | date(format="%B %e, %Y") }}</span>
+    {% endif %}
+    {% if page.description %}
+    <p class="summary">{{ page.description }}</p>
+    {% elif page.summary %}
+    <p class="summary">{{ page.summary }}</p>
+    {% endif %}
+  </li>
+  {% endfor %}
+</ul>
+
+<p id="no-results" class="no-results" hidden>No posts match the selected tags.</p>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{{ get_url(path='js/infinite-scroll.js') | safe }}" defer></script>
+<script src="{{ get_url(path='js/tag-filter.js') | safe }}" defer></script>
+{% endblock %}

@@ -1,0 +1,13 @@
+# The base URL of the site; the only required configuration variable.
+base_url = "https://absence0760.github.io/project-koa"
+
+# The site title and description; used in feeds by default.
+title       = "Koa"
+description = "Notes on making a home and making art."
+
+# Configuration of the Markdown rendering
+taxonomies = [
+  { name = "tags" },
+]
+
+[markdown]

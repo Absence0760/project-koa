@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{{ config.title }}{% endblock %}</title>
+  <meta name="description" content="{% block description %}{{ config.description }}{% endblock %}">
+
+  <link rel="canonical" href="{{ current_url | safe }}">
+
+  <link rel="stylesheet" href="{{ get_url(path='css/style.css') | safe }}">
+</head>
+<body>
+
+  <header class="masthead">
+    <a class="masthead-title" href="{{ get_url(path='/') | safe }}">{{ config.title }}</a>
+    <p class="masthead-tagline">{{ config.description }}</p>
+    <nav class="masthead-nav">
+      <a href="{{ get_url(path='/') | safe }}">Home</a>
+      <a href="{{ get_url(path='/home/') | safe }}">At Home</a>
+      <a href="{{ get_url(path='/art/') | safe }}">Art</a>
+    </nav>
+  </header>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer>
+    <p>&copy; {{ now() | date(format="%Y") }} {{ config.title }}</p>
+  </footer>
+
+  <script src="{{ get_url(path='js/transitions.js') | safe }}" defer></script>
+
+  {% block extra_scripts %}{% endblock %}
+
+</body>
+</html>
