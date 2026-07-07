@@ -18,6 +18,10 @@ If you find a rule worth applying to *every* future project, propose it for the 
 - **CI auth** — CI must use GitHub OIDC against AWS. Never introduce static AWS access keys in workflow files or secrets store.
 - **Pre-commit hooks** — `.pre-commit-config.yaml` runs gitleaks on staged changes. Install once with `pre-commit install`. Don't bypass with `--no-verify`.
 
+## Merging & branch protection
+
+`main` follows the estate "sealed main + CI gate" standard: every change reaches `origin/main` through a PR — **no direct pushes** (enforced on admins, including the owner). There are **0 required approvals**. Force-pushes, branch deletion, and unresolved conversations are blocked; history is linear. This repo has no functional test/build CI on PRs yet, so there is no required **`CI gate`** status check — when CI lands, add an aggregator job named `CI gate` (that `needs:` the CI jobs) to each functional workflow to make it the merge gate. Commit locally per-piece, but land via a PR.
+
 ## Every code change updates tests + docs in the same change
 
 1. Add or update tests for the workspace you touched. If something is genuinely untestable (config, infra, pure styling), say so explicitly — don't skip silently.
